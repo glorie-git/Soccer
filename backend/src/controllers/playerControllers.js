@@ -20,12 +20,6 @@ export const addNewPlayer = (req, res) => {
 }
 
 export const getPlayers = (req, res) => {
-    // Player.find({}, (err, Player) => {
-    //     if(err) {
-
-    //     }
-    //     res.json(Player);
-    // });
     Player.find()
         .then(foundPlayer => {
             res.json(foundPlayer);
@@ -33,10 +27,14 @@ export const getPlayers = (req, res) => {
         .catch(err => {
             res.status(500).send(err);
         });
-        // .then(savedPlayer => {
-        //     res.json(savedPlayer);
-        // })
-        // .catch(err => {
-        //     res.status(500).send(err);
-        // });
+}
+
+export const getPlayerWithID = (req, res) => {
+    Player.findById(req.params.PlayerId)
+        .then(foundPlayer => {
+            res.json(foundPlayer);
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        });
 }
