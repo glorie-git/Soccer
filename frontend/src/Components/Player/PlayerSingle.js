@@ -1,7 +1,18 @@
 import React from 'react';
-
+import axios from 'axios';
 
 const PlayerSingle = (props) => {
+
+    const deletePlayer = (id) => {
+        axios.delete(`http://localhost:4000/player/${id}`)
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     return ( 
         <div className="row">
             <div className="col s12">{/* add "m7" to make it smaller*/}
@@ -17,6 +28,7 @@ const PlayerSingle = (props) => {
                     <div className="card-action">
                         <p>Team: {props.player.team} </p>
                     </div>
+                    <a className="waves-effect waves-light btn" onClick={() => deletePlayer(props.player._id)}>Delete</a>
                 </div>
             </div>
         </div>
