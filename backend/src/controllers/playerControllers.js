@@ -9,10 +9,11 @@ const Player = mongoose.model('Player', PlayerSchema);
 export const addNewPlayer = (req, res) => {
     let newPlayer = new Player(req.body)
 
-    newPlayer.save((err, Player) => {
-        if(err) {
-            res.send(err);
-        }
-        res.json(Player);
-    })
+    newPlayer.save()
+        .then(savedPlayer => {
+            res.json(savedPlayer);
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        });
 }
