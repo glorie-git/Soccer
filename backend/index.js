@@ -1,10 +1,11 @@
 import express from "express";
 import mongoose from 'mongoose';
 import bodyParser from "body-parser";
+import cors from 'cors';
 import routes from "./src/routes/soccerRoutes";
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
 // mongo connection to database
 // ** what is a promise
@@ -19,6 +20,14 @@ mongoose.connect('mongodb://localhost/soccerDB',{
 // bodyparser setup
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
+
+
+// CORS setup
+// When there are two applications running we might running into CORS (Cross-Origin Resource Sharing)
+
+// ChatGPT
+// CORS (Cross-Origin Resource Sharing) is a security feature implemented by web browsers that restricts web pages from making requests to a different origin (domain, protocol, or port) than the one that served the original web page. It's a browser mechanism to ensure web security by preventing unauthorized access to resources.
+app.use(cors());
 
 routes(app);
 
